@@ -1,5 +1,8 @@
 package rocks.zipcode.atm;
 
+
+import javafx.scene.layout.*;
+import javafx.scene.text.FontWeight;
 import rocks.zipcode.atm.bank.Bank;
 import javafx.application.Application;
 import javafx.scene.Parent;
@@ -7,55 +10,69 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.FlowPane;
+
+import java.awt.*;
+
 
 /**
  * @author ZipCodeWilmington
  */
 public class CashMachineApp extends Application {
 
-    private TextField field = new TextField();
+//    private TextField field = new TextField();
+    private TextField idFld = new TextField();
+    private TextField depositFld = new TextField();
+    private TextField withdrawFld = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
 
     private Parent createContent() {
 
         VBox vbox = new VBox(10);
-        vbox.setPrefSize(800, 900);
+        vbox.setPrefSize(500, 600);
 
         TextArea areaInfo = new TextArea();
 
         Button btnSubmit = new Button("Set Account ID");
         btnSubmit.setOnAction(e -> {
-            int id = Integer.parseInt(field.getText());
+            int id = Integer.parseInt(idFld.getText());
             cashMachine.login(id);
 
             areaInfo.setText(cashMachine.toString());
         });
+        idFld.setPromptText("Input your account ID");
+
 
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setOnAction(e -> {
-            float amount = Integer.parseInt(field.getText());
+            float amount = Integer.parseInt(depositFld.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
         });
+        depositFld.setPromptText("How much do you want to deposit ?");
+
+
 
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setOnAction(e -> {
-            float amount = Integer.parseInt(field.getText());
+            float amount = Integer.parseInt(withdrawFld.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
-        });
 
+        });
+        withdrawFld.setPromptText("How much do you want to withdraw ? ");
+       
+        
         Button btnExit = new Button("Exit");
         btnExit.setOnAction(e -> {
             cashMachine.exit();
 
             areaInfo.setText(cashMachine.toString());
+
         });
+
 
         FlowPane flowpane = new FlowPane();
 
@@ -63,15 +80,22 @@ public class CashMachineApp extends Application {
         flowpane.getChildren().add(btnDeposit);
         flowpane.getChildren().add(btnWithdraw);
         flowpane.getChildren().add(btnExit);
-        vbox.getChildren().addAll(field, flowpane, areaInfo);
+        vbox.getChildren().addAll(idFld, depositFld,withdrawFld, flowpane, areaInfo);
         return vbox;
+
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+        
         stage.setScene(new Scene(createContent()));
+        depositFld.setVisible(true);
+        withdrawFld.setVisible(true);
+        idFld.setVisible(true);
+        stage.setTitle("CASH MACHINE JAVAFX APP");
         stage.show();
     }
+    
 
     public static void main(String[] args) {
         launch(args);
