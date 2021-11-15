@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.awt.*;
 
+import static javafx.stage.Stage.*;
+
 
 /**
  * @author ZipCodeWilmington
@@ -24,16 +26,20 @@ public class CashMachineApp extends Application {
     private TextField idFld = new TextField();
     private TextField depositFld = new TextField();
     private TextField withdrawFld = new TextField();
+//    private TextField newWindow = new TextField();
     private CashMachine cashMachine = new CashMachine(new Bank());
+//    private Stage window;
+//    private Button button;
 
     private Parent createContent() {
 
-        VBox vbox = new VBox(10);
-        vbox.setPrefSize(500, 600);
+        VBox vbox = new VBox(20);
+        vbox.setPrefSize(1000, 500);
 
         TextArea areaInfo = new TextArea();
 
         Button btnSubmit = new Button("Set Account ID");
+        btnSubmit.setStyle("-fx-background-color: yellow; -fx-text-fill: blue;");
         btnSubmit.setOnAction(e -> {
             int id = Integer.parseInt(idFld.getText());
             cashMachine.login(id);
@@ -44,6 +50,7 @@ public class CashMachineApp extends Application {
 
 
         Button btnDeposit = new Button("Deposit");
+        btnDeposit.setStyle("-fx-background-color: black; -fx-text-fill: blue;");
         btnDeposit.setOnAction(e -> {
             float amount = Integer.parseInt(depositFld.getText());
             cashMachine.deposit(amount);
@@ -54,7 +61,9 @@ public class CashMachineApp extends Application {
 
 
 
+
         Button btnWithdraw = new Button("Withdraw");
+        btnWithdraw.setStyle("-fx-background-color: #ff0000; ");
         btnWithdraw.setOnAction(e -> {
             float amount = Integer.parseInt(withdrawFld.getText());
             cashMachine.withdraw(amount);
@@ -73,6 +82,7 @@ public class CashMachineApp extends Application {
 
         });
 
+        Button newWindow = new Button();
 
         FlowPane flowpane = new FlowPane();
 
@@ -94,6 +104,19 @@ public class CashMachineApp extends Application {
         idFld.setVisible(true);
         stage.setTitle("CASH MACHINE JAVAFX APP");
         stage.show();
+
+//        window= stage;
+//        button = new Button("Click Me");
+//
+//        button.setOnAction(e -> alertBox.display("Alert Box", "Overdraft Limit!"));
+//
+//        StackPane layout = new StackPane();
+//        layout.getChildren().add(button);
+//        Scene scene = new Scene(layout, 150, 200);
+//        window.setScene(scene);
+//        window.show();
+
+
     }
     
 
