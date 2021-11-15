@@ -52,7 +52,7 @@ public class CashMachineApp extends Application {
         Button btnDeposit = new Button("Deposit");
         btnDeposit.setStyle("-fx-background-color: black; -fx-text-fill: blue;");
         btnDeposit.setOnAction(e -> {
-            float amount = Integer.parseInt(depositFld.getText());
+            float amount = Float.parseFloat(depositFld.getText());
             cashMachine.deposit(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -65,7 +65,7 @@ public class CashMachineApp extends Application {
         Button btnWithdraw = new Button("Withdraw");
         btnWithdraw.setStyle("-fx-background-color: #ff0000; ");
         btnWithdraw.setOnAction(e -> {
-            float amount = Integer.parseInt(withdrawFld.getText());
+            float amount = Float.parseFloat(withdrawFld.getText());
             cashMachine.withdraw(amount);
 
             areaInfo.setText(cashMachine.toString());
@@ -106,7 +106,8 @@ public class CashMachineApp extends Application {
         stage.show();
 
 //        window= stage;
-//        button = new Button("Click Me");
+        AlertBox alertbox= new AlertBox();
+        alertbox.display("AlertBox", "Overdraft Limit Alert");
 //
 //        button.setOnAction(e -> alertBox.display("Alert Box", "Overdraft Limit!"));
 //

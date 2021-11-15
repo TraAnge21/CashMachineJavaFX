@@ -9,18 +9,18 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class alertBox {
+public class AlertBox {
 
-    public static void display(String title, String message) {
+    public void display(String title, String message) {
         Stage window = new Stage();
 
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Alert Box");
+        window.setTitle(title);
         window.setMinWidth(180);
 
         Label label = new Label();
-        label.setText("Overdraft Limit!");
+        label.setText(message);
         Button closeButton = new Button("Close this window");
         closeButton.setOnAction(e -> window.close());
 
